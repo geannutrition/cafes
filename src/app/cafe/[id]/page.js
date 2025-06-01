@@ -1,5 +1,5 @@
 import cafes from '@/app/data/cafes.json';
-
+import Link from 'next/link';
 export default function CafeDetail({ params }) {
   const cafe = cafes.find((c) => c.id === Number(params.id));
   if (!cafe) {
@@ -14,7 +14,9 @@ export default function CafeDetail({ params }) {
         <p><strong>営業時間:</strong> {cafe.hours}</p>
         <p><strong>特徴:</strong> {cafe.features.join(', ')}</p>
         <p><strong>説明:</strong> {cafe.description}</p>
-        <a href="/" className="mt-4 inline-block text-blue-500 hover:underline">戻る</a>
+        <Link href="/" className="mt-4 inline-block text-blue-500 hover:underline">
+          戻る
+        </Link>
       </div>
     </div>
   );
