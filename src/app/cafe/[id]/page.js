@@ -1,4 +1,4 @@
-import cafes from '../data/cafes.json';
+import cafes from '././data/cafes.json';
 
 export default function CafeDetail({ params }) {
   const cafe = cafes.find((c) => c.id === Number(params.id));
