@@ -1,10 +1,18 @@
 import cafes from '@/app/data/cafes.json';
 import Link from 'next/link';
+
 export default function CafeDetail({ params }) {
-  const cafe = cafes.find((c) => c.id === Number(params.id));
+  // params.idをNumberに変換し、存在チェック
+  const id = Number(params?.id);
+  if (!id || isNaN(id)) {
+    return <div className="min-h-screen bg-gray-100 p-4">無効なIDです</div>;
+  }
+
+  const cafe = cafes.find((c) => c.id === id);
   if (!cafe) {
     return <div className="min-h-screen bg-gray-100 p-4">カフェが見つかりません</div>;
   }
+
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       <h1 className="text-3xl font-bold text-center mb-6">{cafe.name}</h1>
