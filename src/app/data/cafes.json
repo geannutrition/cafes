@@ -6,7 +6,9 @@
     "hours": "9:00-18:00",
     "features": ["Wi-Fi", "電源あり"],
     "description": "落ち着いた雰囲気のカフェ",
-    "image": "https://example.com/cafe-a.jpg"
+    "image": "/images/cafes/1/main.jpg",
+    "video": "/videos/cafes/1/tour.mp4",
+    "tabelogUrl": "https://tabelog.com/osaka/A2701/A270101/27012345/"
   },
   {
     "id": 2,
@@ -15,6 +17,8 @@
     "hours": "10:00-20:00",
     "features": ["テラス席", "ペット可"],
     "description": "開放的なテラスが魅力",
-    "image": "https://example.com/cafe-b.jpg"
+    "image": "/images/cafes/2/main.jpg",
+    "video": null,
+    "tabelogUrl": "https://tabelog.com/kyoto/A2601/A260201/26005432/"
   }
 ]
