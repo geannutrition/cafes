@@ -3,13 +3,13 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { MapPin, Clock, Heart, ExternalLink, Star } from "lucide-react"
+import { MapPin, Clock, Heart, ExternalLink, Star, Megaphone } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import FeatureIcons from "./FeatureIcons"
 
-export default function CafeCard({ cafe, index, isFavorite, onToggleFavorite }) {
+export default function CafeCard({ cafe, index, isFavorite, onToggleFavorite, isPRActive }) {
   const [imageError, setImageError] = useState(false)
 
   // 星評価を表示する関数
@@ -43,7 +43,9 @@ export default function CafeCard({ cafe, index, isFavorite, onToggleFavorite }) 
 
   return (
     <Card
-      className="group overflow-hidden bg-white/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-fade-in-up"
+      className={`group overflow-hidden bg-white/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-fade-in-up ${
+        isPRActive ? "ring-2 ring-blue-500 ring-opacity-50" : ""
+      }`}
       style={{ animationDelay: `${index * 100}ms` }}
     >
       <div className="relative overflow-hidden">
@@ -70,21 +72,31 @@ export default function CafeCard({ cafe, index, isFavorite, onToggleFavorite }) 
           <Heart className={`w-5 h-5 ${isFavorite ? "fill-white" : ""}`} />
         </Button>
 
+        {/* PRバッジ */}
+        {isPRActive && (
+          <Badge className="absolute top-3 left-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0 animate-pulse">
+            <Megaphone className="w-3 h-3 mr-1" />
+            PR
+          </Badge>
+        )}
+
         {/* 地域バッジ */}
-        <Badge className="absolute top-3 left-3 bg-gradient-to-r from-rose-500 to-amber-500 text-white border-0">
+        <Badge
+          className={`absolute ${isPRActive ? "top-12" : "top-3"} left-3 bg-gradient-to-r from-rose-500 to-amber-500 text-white border-0`}
+        >
           {cafe.location}
         </Badge>
 
         {/* 新着バッジ */}
         {cafe.isNew && (
-          <Badge className="absolute bottom-3 left-3 bg-rose-600 text-white border-0 animate-pulse">NEW</Badge>
+          <Badge className={`absolute bottom-3 left-3 bg-rose-600 text-white border-0 animate-pulse`}>NEW</Badge>
         )}
       </div>
 
       <CardContent className="p-6">
         <div className="space-y-4">
           <div>
-            <h3 className="text-xl font-bold text-gray-800 group-hover:text-rose-600 transition-colors duration-300">
+            <h3 className="text-xl font-bold text-gray-800 group-hover:text-rose-600 transition-colors duration-300 font-serif">
               {cafe.name}
             </h3>
             <div className="flex items-center mt-1 space-x-2">
@@ -109,7 +121,13 @@ export default function CafeCard({ cafe, index, isFavorite, onToggleFavorite }) 
 
           <div className="flex items-center justify-between pt-4 border-t border-gray-100">
             <Link href={`/cafe/${cafe.id}`}>
-              <Button className="bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-600 hover:to-amber-600 text-white border-0 rounded-full px-6">
+              <Button
+                className={`${
+                  isPRActive
+                    ? "bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600"
+                    : "bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-600 hover:to-amber-600"
+                } text-white border-0 rounded-full px-6 font-medium`}
+              >
                 詳細を見る
               </Button>
             </Link>

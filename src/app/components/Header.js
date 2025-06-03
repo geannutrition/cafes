@@ -21,11 +21,11 @@ export default function Header() {
         <div className="flex items-center justify-between h-16">
           {/* ロゴ */}
           <Link href="/" className="flex items-center space-x-2 group">
-            <div className="p-2 bg-gradient-to-r from-rose-500 to-teal-500 rounded-lg group-hover:scale-110 transition-transform duration-300">
+            <div className="p-2 bg-gradient-to-r from-rose-500 to-amber-500 rounded-lg group-hover:scale-110 transition-transform duration-300">
               <Coffee className="w-6 h-6 text-white" />
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-rose-600 to-teal-600 bg-clip-text text-transparent">
-              関西カフェガイド
+            <span className="text-xl font-bold bg-gradient-to-r from-rose-600 to-amber-600 bg-clip-text text-transparent">
+              関西カフェ検索
             </span>
           </Link>
 
@@ -38,7 +38,7 @@ export default function Header() {
                 className="text-gray-700 hover:text-rose-600 transition-colors duration-300 font-medium relative group"
               >
                 {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-rose-500 to-teal-500 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-rose-500 to-amber-500 group-hover:w-full transition-all duration-300"></span>
               </Link>
             ))}
           </nav>

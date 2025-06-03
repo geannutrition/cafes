@@ -4,105 +4,37 @@ import { useState, useEffect } from "react"
 import { useParams, useRouter } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowLeft, MapPin, Clock, ExternalLink, Heart, Share2, Play, Star, Calendar, Coffee } from "lucide-react"
+import {
+  ArrowLeft,
+  MapPin,
+  Clock,
+  ExternalLink,
+  Heart,
+  Share2,
+  Play,
+  Star,
+  Calendar,
+  Coffee,
+  Megaphone,
+} from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import Header from "../../components/Header"
 import FeatureIcons from "../../components/FeatureIcons"
 import OpeningHoursDisplay from "../../components/OpeningHoursDisplay"
+import cafesData from "../../../data/cafes.json"
 
-// サンプルデータ（実際のプロジェクトではcafes.jsonから読み込み）
-const cafesData = [
-  {
-    id: 1,
-    name: "カフェ・ド・パリ",
-    address: "大阪府大阪市北区梅田1-1-1",
-    hours: "8:00-22:00",
-    features: ["Wi-Fi", "電源", "静か"],
-    location: "大阪府",
-    description:
-      "フランス風の落ち着いた雰囲気のカフェ。美味しいコーヒーと手作りスイーツが自慢です。パリの街角にあるような温かみのある空間で、ゆったりとした時間をお過ごしいただけます。朝早くから夜遅くまで営業しているので、モーニングからディナーまで様々なシーンでご利用いただけます。",
-    image: "/images/cafes/1/main.jpg",
-    video: "/videos/cafes/1/tour.mp4",
-    tabelog_url: "https://tabelog.com/example1",
-    rating: 4.5,
-    isNew: true,
-    openDate: "2023-10-15",
-    businessHours: {
-      mon: { open: "8:00", close: "22:00" },
-      tue: { open: "8:00", close: "22:00" },
-      wed: { open: "8:00", close: "22:00" },
-      thu: { open: "8:00", close: "22:00" },
-      fri: { open: "8:00", close: "23:00" },
-      sat: { open: "9:00", close: "23:00" },
-      sun: { open: "9:00", close: "21:00" },
-    },
-    popularMenu: [
-      { name: "クロワッサン", price: "380円", description: "バターの香り豊かな本格派" },
-      { name: "カフェラテ", price: "520円", description: "濃厚なエスプレッソと滑らかなミルク" },
-      { name: "キッシュロレーヌ", price: "680円", description: "ベーコンとチーズの風味が絶妙" },
-    ],
-  },
-  {
-    id: 2,
-    name: "京都茶房",
-    address: "京都府京都市中京区河原町通り2-2-2",
-    hours: "9:00-21:00",
-    features: ["和風", "静か", "テラス"],
-    location: "京都府",
-    description: "伝統的な京都の雰囲気を味わえる茶房。抹茶と和菓子が絶品です。",
-    image: "/images/cafes/2/main.jpg",
-    video: null,
-    tabelog_url: "https://tabelog.com/example2",
-    rating: 4.2,
-    isNew: false,
-    openDate: "2020-05-10",
-    businessHours: {
-      mon: { open: "9:00", close: "21:00" },
-      tue: { open: "9:00", close: "21:00" },
-      wed: { open: "9:00", close: "21:00" },
-      thu: { open: "9:00", close: "21:00" },
-      fri: { open: "9:00", close: "21:00" },
-      sat: { open: "10:00", close: "22:00" },
-      sun: { open: "10:00", close: "20:00" },
-    },
-    popularMenu: [
-      { name: "抹茶セット", price: "850円", description: "濃厚な抹茶と季節の和菓子" },
-      { name: "ほうじ茶ラテ", price: "580円", description: "香ばしさと甘みのハーモニー" },
-      { name: "わらび餅", price: "650円", description: "手作りの黒蜜ときな粉で" },
-    ],
-  },
-  {
-    id: 3,
-    name: "モダンブリュー",
-    address: "兵庫県神戸市中央区三宮町3-3-3",
-    hours: "7:00-20:00",
-    features: ["Wi-Fi", "電源", "コワーキング"],
-    location: "兵庫県",
-    description: "スタイリッシュな空間でこだわりのコーヒーを。ノマドワーカーにも人気です。",
-    image: "/images/cafes/3/main.jpg",
-    video: "/videos/cafes/3/tour.mp4",
-    tabelog_url: "https://tabelog.com/example3",
-    rating: 4.7,
-    isNew: true,
-    openDate: "2023-09-05",
-    businessHours: {
-      mon: { open: "7:00", close: "20:00" },
-      tue: { open: "7:00", close: "20:00" },
-      wed: { open: "7:00", close: "20:00" },
-      thu: { open: "7:00", close: "20:00" },
-      fri: { open: "7:00", close: "22:00" },
-      sat: { open: "8:00", close: "22:00" },
-      sun: { open: "8:00", close: "19:00" },
-    },
-    popularMenu: [
-      { name: "シングルオリジン", price: "550円", description: "日替わりの豆を楽しめる一杯" },
-      { name: "アボカドトースト", price: "780円", description: "朝食にぴったりの栄養満点メニュー" },
-      { name: "チーズケーキ", price: "620円", description: "なめらかな口当たりと濃厚な味わい" },
-    ],
-  },
-]
+// PR期間中かどうかを判定する関数
+const isPRActive = (cafe) => {
+  if (!cafe.isPR || !cafe.prStartDate || !cafe.prEndDate) return false
+
+  const now = new Date()
+  const startDate = new Date(cafe.prStartDate)
+  const endDate = new Date(cafe.prEndDate)
+
+  return now >= startDate && now <= endDate
+}
 
 export default function CafeDetailPage() {
   const params = useParams()
@@ -113,6 +45,7 @@ export default function CafeDetailPage() {
 
   const cafeId = Number.parseInt(params.id)
   const cafe = cafesData.find((c) => c.id === cafeId)
+  const isCurrentlyPR = cafe ? isPRActive(cafe) : false
 
   // お気に入り状態をローカルストレージから読み込み
   useEffect(() => {
@@ -172,9 +105,9 @@ export default function CafeDetailPage() {
       <div className="min-h-screen bg-gradient-to-br from-rose-50 via-amber-50 to-orange-50">
         <Header />
         <div className="container mx-auto px-4 py-16 text-center">
-          <h1 className="text-2xl font-bold text-gray-800 mb-4">カフェが見つかりません</h1>
+          <h1 className="text-2xl font-bold text-gray-800 mb-4 font-serif">カフェが見つかりません</h1>
           <Link href="/">
-            <Button className="bg-gradient-to-r from-rose-500 to-amber-500 text-white">ホームに戻る</Button>
+            <Button className="bg-gradient-to-r from-rose-500 to-amber-500 text-white font-medium">ホームに戻る</Button>
           </Link>
         </div>
       </div>
@@ -185,12 +118,24 @@ export default function CafeDetailPage() {
     <div className="min-h-screen bg-gradient-to-br from-rose-50 via-amber-50 to-orange-50">
       <Header />
 
+      {/* PRバナー */}
+      {isCurrentlyPR && (
+        <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3">
+          <div className="container mx-auto px-4 text-center">
+            <div className="flex items-center justify-center space-x-2">
+              <Megaphone className="w-5 h-5" />
+              <span className="font-medium">このカフェは現在PR期間中です</span>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="container mx-auto px-4 py-8">
         {/* 戻るボタン */}
         <Button
           variant="ghost"
           onClick={() => router.back()}
-          className="mb-6 hover:bg-rose-50 text-gray-600 hover:text-rose-600"
+          className="mb-6 hover:bg-rose-50 text-gray-600 hover:text-rose-600 font-medium"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           戻る
@@ -199,7 +144,11 @@ export default function CafeDetailPage() {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* メイン画像・動画エリア */}
           <div className="lg:col-span-2">
-            <Card className="overflow-hidden bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+            <Card
+              className={`overflow-hidden bg-white/80 backdrop-blur-sm border-0 shadow-xl ${
+                isCurrentlyPR ? "ring-2 ring-blue-500 ring-opacity-50" : ""
+              }`}
+            >
               <div className="relative">
                 {showVideo && cafe.video ? (
                   <video
@@ -251,13 +200,26 @@ export default function CafeDetailPage() {
                   </Button>
                 </div>
 
-                <Badge className="absolute top-4 left-4 bg-gradient-to-r from-rose-500 to-amber-500 text-white border-0">
+                {/* PRバッジ */}
+                {isCurrentlyPR && (
+                  <Badge className="absolute top-4 left-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0 font-medium animate-pulse">
+                    <Megaphone className="w-3 h-3 mr-1" />
+                    PR
+                  </Badge>
+                )}
+
+                {/* 地域バッジ */}
+                <Badge
+                  className={`absolute ${isCurrentlyPR ? "top-12" : "top-4"} left-4 bg-gradient-to-r from-rose-500 to-amber-500 text-white border-0 font-medium`}
+                >
                   {cafe.location}
                 </Badge>
 
                 {/* 新着バッジ */}
                 {cafe.isNew && (
-                  <Badge className="absolute bottom-4 left-4 bg-rose-600 text-white border-0 animate-pulse">NEW</Badge>
+                  <Badge className="absolute bottom-4 left-4 bg-rose-600 text-white border-0 animate-pulse font-medium">
+                    NEW
+                  </Badge>
                 )}
               </div>
             </Card>
@@ -265,20 +227,20 @@ export default function CafeDetailPage() {
             {/* 説明 */}
             <Card className="mt-6 bg-white/80 backdrop-blur-sm border-0 shadow-lg">
               <CardContent className="p-6">
-                <h2 className="text-xl font-bold text-gray-800 mb-4">カフェについて</h2>
-                <p className="text-gray-700 leading-relaxed">{cafe.description}</p>
+                <h2 className="text-xl font-bold text-gray-800 mb-4 font-serif">カフェについて</h2>
+                <p className="text-gray-700 leading-relaxed font-medium">{cafe.description}</p>
 
                 {/* 人気メニュー */}
                 {cafe.popularMenu && (
                   <div className="mt-8">
-                    <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                    <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center font-serif">
                       <Coffee className="w-5 h-5 mr-2 text-amber-600" />
                       人気メニュー
                     </h3>
                     <div className="grid md:grid-cols-3 gap-4">
                       {cafe.popularMenu.map((item, index) => (
                         <div key={index} className="bg-white p-4 rounded-lg shadow-sm">
-                          <h4 className="font-bold text-rose-600">{item.name}</h4>
+                          <h4 className="font-bold text-rose-600 font-serif">{item.name}</h4>
                           <p className="text-amber-600 font-medium">{item.price}</p>
                           <p className="text-sm text-gray-600 mt-1">{item.description}</p>
                         </div>
@@ -295,7 +257,7 @@ export default function CafeDetailPage() {
             {/* 基本情報 */}
             <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
               <CardContent className="p-6">
-                <h1 className="text-3xl font-bold text-gray-800 mb-2">{cafe.name}</h1>
+                <h1 className="text-3xl font-bold text-gray-800 mb-2 font-serif">{cafe.name}</h1>
 
                 {/* 評価 */}
                 <div className="flex items-center space-x-2 mb-4">
@@ -307,10 +269,10 @@ export default function CafeDetailPage() {
                   <div className="flex items-start space-x-3">
                     <MapPin className="w-5 h-5 text-rose-500 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="text-gray-700">{cafe.address}</p>
+                      <p className="text-gray-700 font-medium">{cafe.address}</p>
                       <Button
                         variant="link"
-                        className="p-0 h-auto text-blue-600 hover:text-blue-800"
+                        className="p-0 h-auto text-blue-600 hover:text-blue-800 font-medium"
                         onClick={() =>
                           window.open(`https://maps.google.com/?q=${encodeURIComponent(cafe.address)}`, "_blank")
                         }
@@ -322,25 +284,29 @@ export default function CafeDetailPage() {
 
                   <div className="flex items-center space-x-3">
                     <Clock className="w-5 h-5 text-amber-500" />
-                    <span className="text-gray-700">{cafe.hours}</span>
+                    <span className="text-gray-700 font-medium">{cafe.hours}</span>
                   </div>
 
                   {cafe.openDate && (
                     <div className="flex items-center space-x-3">
                       <Calendar className="w-5 h-5 text-rose-500" />
-                      <span className="text-gray-700">オープン日: {cafe.openDate}</span>
+                      <span className="text-gray-700 font-medium">オープン日: {cafe.openDate}</span>
                     </div>
                   )}
                 </div>
 
                 <div className="mt-6">
-                  <h3 className="font-semibold text-gray-800 mb-3">特徴</h3>
+                  <h3 className="font-semibold text-gray-800 mb-3 font-serif">特徴</h3>
                   <FeatureIcons features={cafe.features} />
                 </div>
 
                 <Button
                   onClick={() => window.open(cafe.tabelog_url, "_blank")}
-                  className="w-full mt-6 bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-600 hover:to-amber-600 text-white border-0"
+                  className={`w-full mt-6 ${
+                    isCurrentlyPR
+                      ? "bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600"
+                      : "bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-600 hover:to-amber-600"
+                  } text-white border-0 font-medium`}
                 >
                   <ExternalLink className="w-4 h-4 mr-2" />
                   食べログで見る
@@ -352,7 +318,7 @@ export default function CafeDetailPage() {
             {cafe.businessHours && (
               <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
                 <CardContent className="p-6">
-                  <h3 className="font-bold text-gray-800 mb-4 flex items-center">
+                  <h3 className="font-bold text-gray-800 mb-4 flex items-center font-serif">
                     <Clock className="w-5 h-5 mr-2 text-amber-500" />
                     営業時間
                   </h3>
@@ -364,7 +330,7 @@ export default function CafeDetailPage() {
             {/* 関連カフェ */}
             <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
               <CardContent className="p-6">
-                <h3 className="font-bold text-gray-800 mb-4">同じ地域のカフェ</h3>
+                <h3 className="font-bold text-gray-800 mb-4 font-serif">同じ地域のカフェ</h3>
                 <div className="space-y-3">
                   {cafesData
                     .filter((c) => c.location === cafe.location && c.id !== cafe.id)
@@ -380,7 +346,7 @@ export default function CafeDetailPage() {
                             className="rounded-lg object-cover"
                           />
                           <div className="flex-1 min-w-0">
-                            <p className="font-medium text-gray-800 truncate">{relatedCafe.name}</p>
+                            <p className="font-medium text-gray-800 truncate font-serif">{relatedCafe.name}</p>
                             <p className="text-sm text-gray-500 truncate">{relatedCafe.address}</p>
                           </div>
                         </div>

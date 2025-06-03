@@ -13,9 +13,6 @@
     "rating": 4.5,
     "isNew": true,
     "openDate": "2023-10-15",
-    "isPR": true,
-    "prStartDate": "2025-06-01",
-    "prEndDate": "2025-06-30",
     "businessHours": {
       "mon": { "open": "8:00", "close": "22:00" },
       "tue": { "open": "8:00", "close": "22:00" },
@@ -45,9 +42,6 @@
     "rating": 4.2,
     "isNew": false,
     "openDate": "2020-05-10",
-    "isPR": false,
-    "prStartDate": null,
-    "prEndDate": null,
     "businessHours": {
       "mon": { "open": "9:00", "close": "21:00" },
       "tue": { "open": "9:00", "close": "21:00" },
@@ -77,9 +71,6 @@
     "rating": 4.7,
     "isNew": true,
     "openDate": "2023-09-05",
-    "isPR": true,
-    "prStartDate": "2025-05-15",
-    "prEndDate": "2025-07-15",
     "businessHours": {
       "mon": { "open": "7:00", "close": "20:00" },
       "tue": { "open": "7:00", "close": "20:00" },

@@ -50,14 +50,14 @@ export default function FilterSection({
       <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
         <CardHeader className="pb-4">
           <div className="flex items-center justify-between">
-            <CardTitle className="flex items-center space-x-2 text-lg">
+            <CardTitle className="flex items-center space-x-2 text-lg font-serif">
               <Filter className="w-5 h-5 text-rose-500" />
               <span>絞り込み</span>
             </CardTitle>
             {hasActiveFilters && (
               <Button variant="ghost" size="sm" onClick={clearAllFilters} className="text-gray-500 hover:text-rose-500">
                 <X className="w-4 h-4 mr-1" />
-                クリア
+                <span className="font-medium">クリア</span>
               </Button>
             )}
           </div>
@@ -69,7 +69,7 @@ export default function FilterSection({
             <Button
               variant={showFavorites ? "default" : "outline"}
               onClick={onToggleFavorites}
-              className={`w-full ${showFavorites ? "bg-rose-500 hover:bg-rose-600" : "border-rose-200 text-rose-700 hover:bg-rose-50"}`}
+              className={`w-full font-medium ${showFavorites ? "bg-rose-500 hover:bg-rose-600" : "border-rose-200 text-rose-700 hover:bg-rose-50"}`}
             >
               <Heart className={`w-4 h-4 mr-2 ${showFavorites ? "fill-white" : ""}`} />
               お気に入り{favoriteCount > 0 ? ` (${favoriteCount})` : ""}
@@ -78,12 +78,12 @@ export default function FilterSection({
 
           {/* ソート機能 */}
           <div>
-            <h4 className="font-semibold text-gray-800 mb-3">並び替え</h4>
+            <h4 className="font-serif font-semibold text-gray-800 mb-3 text-base">並び替え</h4>
             <div className="space-y-2">
               <Button
                 variant={sortBy === "rating" ? "default" : "outline"}
                 onClick={() => onSortChange(sortBy === "rating" ? "none" : "rating")}
-                className={`w-full ${sortBy === "rating" ? "bg-amber-500 hover:bg-amber-600" : "border-amber-200 text-amber-700 hover:bg-amber-50"}`}
+                className={`w-full font-medium ${sortBy === "rating" ? "bg-amber-500 hover:bg-amber-600" : "border-amber-200 text-amber-700 hover:bg-amber-50"}`}
               >
                 <Star className={`w-4 h-4 mr-2 ${sortBy === "rating" ? "fill-white" : ""}`} />
                 評価順
@@ -92,7 +92,7 @@ export default function FilterSection({
               <Button
                 variant={sortBy === "newest" ? "default" : "outline"}
                 onClick={() => onSortChange(sortBy === "newest" ? "none" : "newest")}
-                className={`w-full ${sortBy === "newest" ? "bg-rose-500 hover:bg-rose-600" : "border-rose-200 text-rose-700 hover:bg-rose-50"}`}
+                className={`w-full font-medium ${sortBy === "newest" ? "bg-rose-500 hover:bg-rose-600" : "border-rose-200 text-rose-700 hover:bg-rose-50"}`}
               >
                 <TrendingUp className="w-4 h-4 mr-2" />
                 新着順
@@ -102,7 +102,7 @@ export default function FilterSection({
 
           {/* 特徴フィルター */}
           <div>
-            <h4 className="font-semibold text-gray-800 mb-3">特徴</h4>
+            <h4 className="font-serif font-semibold text-gray-800 mb-3 text-base">特徴</h4>
             <div className="space-y-2">
               {allFeatures.map((feature) => (
                 <div key={feature} className="flex items-center space-x-2">
@@ -114,7 +114,7 @@ export default function FilterSection({
                   />
                   <label
                     htmlFor={`feature-${feature}`}
-                    className="text-sm text-gray-700 cursor-pointer hover:text-rose-600 transition-colors"
+                    className="text-sm font-medium text-gray-700 cursor-pointer hover:text-rose-600 transition-colors"
                   >
                     {feature}
                   </label>
@@ -125,7 +125,7 @@ export default function FilterSection({
 
           {/* 地域フィルター */}
           <div>
-            <h4 className="font-semibold text-gray-800 mb-3">地域</h4>
+            <h4 className="font-serif font-semibold text-gray-800 mb-3 text-base">地域</h4>
             <div className="space-y-2">
               {allLocations.map((location) => (
                 <div key={location} className="flex items-center space-x-2">
@@ -137,7 +137,7 @@ export default function FilterSection({
                   />
                   <label
                     htmlFor={`location-${location}`}
-                    className="text-sm text-gray-700 cursor-pointer hover:text-amber-600 transition-colors"
+                    className="text-sm font-medium text-gray-700 cursor-pointer hover:text-amber-600 transition-colors"
                   >
                     {location}
                   </label>
@@ -150,15 +150,15 @@ export default function FilterSection({
 
       {/* アクティブフィルター表示 */}
       {hasActiveFilters && (
-        <Card className="bg-gradient-to-r from-rose-50 to-amber-50 border-0">
+        <Card className="bg-gradient-to-r from-rose-100 via-rose-70 to-amber-100 border-0 bg-[position:90%]">
           <CardContent className="p-4">
-            <h4 className="font-semibold text-gray-800 mb-2 text-sm">選択中の条件</h4>
+            <h4 className="font-serif font-semibold text-gray-800 mb-2 text-sm">選択中の条件</h4>
             <div className="flex flex-wrap gap-2">
               {selectedFeatures.map((feature) => (
                 <Badge
                   key={feature}
                   variant="secondary"
-                  className="bg-rose-100 text-rose-700 hover:bg-rose-200 cursor-pointer"
+                  className="bg-rose-100 text-rose-700 hover:bg-rose-200 cursor-pointer font-medium"
                   onClick={() => handleFeatureToggle(feature)}
                 >
                   {feature}
@@ -169,7 +169,7 @@ export default function FilterSection({
                 <Badge
                   key={location}
                   variant="secondary"
-                  className="bg-amber-100 text-amber-700 hover:bg-amber-200 cursor-pointer"
+                  className="bg-amber-100 text-amber-700 hover:bg-amber-200 cursor-pointer font-medium"
                   onClick={() => handleLocationToggle(location)}
                 >
                   {location}
@@ -179,7 +179,7 @@ export default function FilterSection({
               {showFavorites && (
                 <Badge
                   variant="secondary"
-                  className="bg-rose-100 text-rose-700 hover:bg-rose-200 cursor-pointer"
+                  className="bg-rose-100 text-rose-700 hover:bg-rose-200 cursor-pointer font-medium"
                   onClick={onToggleFavorites}
                 >
                   お気に入りのみ
@@ -189,7 +189,7 @@ export default function FilterSection({
               {sortBy === "rating" && (
                 <Badge
                   variant="secondary"
-                  className="bg-amber-100 text-amber-700 hover:bg-amber-200 cursor-pointer"
+                  className="bg-amber-100 text-amber-700 hover:bg-amber-200 cursor-pointer font-medium"
                   onClick={() => onSortChange("none")}
                 >
                   評価順
@@ -199,7 +199,7 @@ export default function FilterSection({
               {sortBy === "newest" && (
                 <Badge
                   variant="secondary"
-                  className="bg-rose-100 text-rose-700 hover:bg-rose-200 cursor-pointer"
+                  className="bg-rose-100 text-rose-700 hover:bg-rose-200 cursor-pointer font-medium"
                   onClick={() => onSortChange("none")}
                 >
                   新着順
