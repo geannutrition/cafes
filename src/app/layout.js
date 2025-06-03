@@ -17,6 +17,7 @@ const playfair = Playfair_Display({
 export const metadata = {
   title: "関西カフェガイド",
   description: "関西の素敵なカフェを見つけよう",
+  generator: "v0.dev",
 }
 
 export default function RootLayout({ children }) {
@@ -26,3 +27,4 @@ export default function RootLayout({ children }) {
     </html>
   )
 }
+
