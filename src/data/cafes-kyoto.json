@@ -1,0 +1,72 @@
+[
+  {
+    "id": 2,
+    "name": "京都茶房",
+    "address": "京都府京都市中京区河原町通り2-2-2",
+    "city": "京都市",
+    "hours": "9:00-21:00",
+    "features": ["和風", "静か", "テラス"],
+    "description": "伝統的な京都の雰囲気を味わえる茶房。抹茶と和菓子が絶品です。",
+    "image": "/images/cafes/2/main.jpg",
+    "video": null,
+    "tabelog_url": "https://tabelog.com/example2",
+    "instagram": "https://instagram.com/kyoto_sabou",
+    "twitter": null,
+    "phone": "075-1234-5678",
+    "rating": 4.2,
+    "isNew": false,
+    "openDate": "2020-05-10",
+    "isPR": false,
+    "prStartDate": null,
+    "prEndDate": null,
+    "businessHours": {
+      "mon": { "open": "9:00", "close": "21:00" },
+      "tue": { "open": "9:00", "close": "21:00" },
+      "wed": { "open": "9:00", "close": "21:00" },
+      "thu": { "open": "9:00", "close": "21:00" },
+      "fri": { "open": "9:00", "close": "21:00" },
+      "sat": { "open": "10:00", "close": "22:00" },
+      "sun": { "open": "10:00", "close": "20:00" }
+    },
+    "popularMenu": [
+      { "name": "抹茶セット", "price": "850円", "description": "濃厚な抹茶と季節の和菓子" },
+      { "name": "ほうじ茶ラテ", "price": "580円", "description": "香ばしさと甘みのハーモニー" },
+      { "name": "わらび餅", "price": "650円", "description": "手作りの黒蜜ときな粉で" }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "嵐山カフェテラス",
+    "address": "京都府京都市右京区嵯峨天龍寺1-1-1",
+    "city": "嵯峨嵐山",
+    "hours": "10:00-18:00",
+    "features": ["和風", "テラス", "景色"],
+    "description": "嵐山の美しい景色を眺めながらお茶を楽しめるカフェ。四季折々の風景が魅力です。",
+    "image": "/images/cafes/5/main.jpg",
+    "video": null,
+    "tabelog_url": "https://tabelog.com/example5",
+    "instagram": "https://instagram.com/arashiyama_cafe",
+    "twitter": null,
+    "phone": "075-2345-6789",
+    "rating": 4.6,
+    "isNew": true,
+    "openDate": "2023-11-01",
+    "isPR": false,
+    "prStartDate": null,
+    "prEndDate": null,
+    "businessHours": {
+      "mon": { "open": "10:00", "close": "18:00" },
+      "tue": { "open": "10:00", "close": "18:00" },
+      "wed": { "open": "10:00", "close": "18:00" },
+      "thu": { "open": "10:00", "close": "18:00" },
+      "fri": { "open": "10:00", "close": "19:00" },
+      "sat": { "open": "9:00", "close": "19:00" },
+      "sun": { "open": "9:00", "close": "18:00" }
+    },
+    "popularMenu": [
+      { "name": "京都ブレンド", "price": "600円", "description": "京都らしい上品な味わい" },
+      { "name": "抹茶パフェ", "price": "980円", "description": "宇治抹茶を贅沢に使用" },
+      { "name": "湯豆腐セット", "price": "1200円", "description": "嵐山名物の湯豆腐" }
+    ]
+  }
+]

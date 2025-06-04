@@ -1,0 +1,37 @@
+[
+  {
+    "id": 9,
+    "name": "熊野古道カフェ",
+    "address": "和歌山県田辺市本宮町1-1-1",
+    "city": "田辺市",
+    "hours": "8:00-16:00",
+    "features": ["自然", "静か", "歴史"],
+    "description": "熊野古道の入り口にある歴史ある建物を改装したカフェ。自然に囲まれた静寂の中で心を癒してください。",
+    "image": "/images/cafes/9/main.jpg",
+    "video": null,
+    "tabelog_url": "https://tabelog.com/example9",
+    "instagram": "https://instagram.com/kumano_kodo_cafe",
+    "twitter": null,
+    "phone": "0739-123-4567",
+    "rating": 4.3,
+    "isNew": false,
+    "openDate": "2020-10-01",
+    "isPR": false,
+    "prStartDate": null,
+    "prEndDate": null,
+    "businessHours": {
+      "mon": { "open": "8:00", "close": "16:00" },
+      "tue": { "open": "8:00", "close": "16:00" },
+      "wed": { "open": "8:00", "close": "16:00" },
+      "thu": { "open": "8:00", "close": "16:00" },
+      "fri": { "open": "8:00", "close": "16:00" },
+      "sat": { "open": "7:30", "close": "17:00" },
+      "sun": { "open": "7:30", "close": "17:00" }
+    },
+    "popularMenu": [
+      { "name": "熊野ブレンド", "price": "500円", "description": "熊野の自然をイメージしたブレンド" },
+      { "name": "梅干しおにぎり", "price": "350円", "description": "和歌山名産の梅干しを使用" },
+      { "name": "みかんジュース", "price": "400円", "description": "和歌山産みかん100%ジュース" }
+    ]
+  }
+]

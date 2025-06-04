@@ -32,7 +32,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="ja" className={`${notoSans.variable} ${notoSerif.variable} ${playfair.variable}`}>
-      <body className="font-sans antialiased">{children}</body>
+      <body className="font-sans antialiased min-h-screen flex flex-col">{children}</body>
     </html>
   )
 }

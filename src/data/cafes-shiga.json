@@ -1,0 +1,37 @@
+[
+  {
+    "id": 8,
+    "name": "琵琶湖テラスカフェ",
+    "address": "滋賀県大津市浜大津1-1-1",
+    "city": "大津市",
+    "hours": "10:00-19:00",
+    "features": ["テラス", "景色", "リゾート"],
+    "description": "琵琶湖を一望できる絶景テラスカフェ。湖畔の美しい景色とともに特別な時間をお過ごしください。",
+    "image": "/images/cafes/8/main.jpg",
+    "video": null,
+    "tabelog_url": "https://tabelog.com/example8",
+    "instagram": "https://instagram.com/biwako_terrace_cafe",
+    "twitter": "https://x.com/biwako_terrace",
+    "phone": "077-123-4567",
+    "rating": 4.5,
+    "isNew": true,
+    "openDate": "2023-08-01",
+    "isPR": false,
+    "prStartDate": null,
+    "prEndDate": null,
+    "businessHours": {
+      "mon": { "open": "10:00", "close": "19:00" },
+      "tue": { "open": "10:00", "close": "19:00" },
+      "wed": { "open": "10:00", "close": "19:00" },
+      "thu": { "open": "10:00", "close": "19:00" },
+      "fri": { "open": "10:00", "close": "20:00" },
+      "sat": { "open": "9:00", "close": "20:00" },
+      "sun": { "open": "9:00", "close": "19:00" }
+    },
+    "popularMenu": [
+      { "name": "琵琶湖ブレンド", "price": "580円", "description": "琵琶湖をイメージした爽やかなブレンド" },
+      { "name": "近江牛バーガー", "price": "1200円", "description": "近江牛を使った贅沢バーガー" },
+      { "name": "湖国パフェ", "price": "780円", "description": "滋賀の特産品を使ったパフェ" }
+    ]
+  }
+]

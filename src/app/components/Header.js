@@ -18,13 +18,13 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-rose-100 shadow-sm">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-12 md:h-16">
           {/* ロゴ */}
           <Link href="/" className="flex items-center space-x-2 group">
-            <div className="p-2 bg-gradient-to-r from-rose-500 to-amber-500 rounded-lg group-hover:scale-110 transition-transform duration-300">
-              <Coffee className="w-6 h-6 text-white" />
+            <div className="p-1.5 md:p-2 bg-gradient-to-r from-rose-500 to-amber-500 rounded-lg group-hover:scale-110 transition-transform duration-300">
+              <Coffee className="w-4 h-4 md:w-6 md:h-6 text-white" />
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-rose-600 to-amber-600 bg-clip-text text-transparent">
+            <span className="text-lg md:text-xl font-bold bg-gradient-to-r from-rose-600 to-amber-600 bg-clip-text text-transparent">
               関西カフェ検索
             </span>
           </Link>
@@ -35,7 +35,7 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-gray-700 hover:text-rose-600 transition-colors duration-300 font-medium relative group"
+                className="text-gray-700 hover:text-rose-600 transition-colors duration-300 font-medium relative group text-sm"
               >
                 {item.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-rose-500 to-amber-500 group-hover:w-full transition-all duration-300"></span>
@@ -44,20 +44,20 @@ export default function Header() {
           </nav>
 
           {/* モバイルメニューボタン */}
-          <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          <Button variant="ghost" size="sm" className="md:hidden p-1" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </Button>
         </div>
 
         {/* モバイルナビゲーション */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-rose-100 animate-slide-down">
-            <nav className="flex flex-col space-y-4">
+          <div className="md:hidden py-3 border-t border-rose-100 animate-slide-down">
+            <nav className="flex flex-col space-y-2">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="text-gray-700 hover:text-rose-600 transition-colors duration-300 font-medium px-4 py-2 rounded-lg hover:bg-rose-50"
+                  className="text-gray-700 hover:text-rose-600 transition-colors duration-300 font-medium px-4 py-2 rounded-lg hover:bg-rose-50 text-sm"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.label}

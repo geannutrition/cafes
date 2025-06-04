@@ -22,19 +22,21 @@ export default function OpeningHoursDisplay({ hours }) {
   }, [])
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-1 md:space-y-2">
       {Object.entries(hours).map(([day, time]) => (
         <div
           key={day}
-          className={`flex justify-between py-2 px-3 rounded-md ${day === today ? "bg-amber-50 border-l-4 border-amber-500" : ""}`}
+          className={`flex justify-between py-1 md:py-2 px-2 md:px-3 rounded-md ${day === today ? "bg-amber-50 border-l-4 border-amber-500" : ""}`}
         >
-          <span className={`${day === today ? "font-medium text-amber-800" : "text-gray-700"}`}>
+          <span className={`text-xs md:text-sm ${day === today ? "font-medium text-amber-800" : "text-gray-700"}`}>
             {DAYS[day]}
             {day === today && (
-              <span className="ml-2 text-xs bg-amber-200 text-amber-800 px-2 py-0.5 rounded-full">本日</span>
+              <span className="ml-1 md:ml-2 text-xs bg-amber-200 text-amber-800 px-1 md:px-2 py-0.5 rounded-full">
+                本日
+              </span>
             )}
           </span>
-          <span className={`${day === today ? "font-medium text-amber-800" : "text-gray-700"}`}>
+          <span className={`text-xs md:text-sm ${day === today ? "font-medium text-amber-800" : "text-gray-700"}`}>
             {time.open} - {time.close}
           </span>
         </div>

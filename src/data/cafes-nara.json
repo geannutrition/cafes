@@ -1,0 +1,37 @@
+[
+  {
+    "id": 7,
+    "name": "奈良公園カフェ",
+    "address": "奈良県奈良市春日野町1-1-1",
+    "city": "奈良市",
+    "hours": "9:00-17:00",
+    "features": ["和風", "静か", "自然"],
+    "description": "奈良公園の緑に囲まれた静かなカフェ。鹿たちを眺めながらのんびりとした時間を過ごせます。",
+    "image": "/images/cafes/7/main.jpg",
+    "video": null,
+    "tabelog_url": "https://tabelog.com/example7",
+    "instagram": "https://instagram.com/nara_park_cafe",
+    "twitter": null,
+    "phone": "0742-123-4567",
+    "rating": 4.1,
+    "isNew": false,
+    "openDate": "2019-04-01",
+    "isPR": false,
+    "prStartDate": null,
+    "prEndDate": null,
+    "businessHours": {
+      "mon": { "open": "9:00", "close": "17:00" },
+      "tue": { "open": "9:00", "close": "17:00" },
+      "wed": { "open": "9:00", "close": "17:00" },
+      "thu": { "open": "9:00", "close": "17:00" },
+      "fri": { "open": "9:00", "close": "17:00" },
+      "sat": { "open": "8:30", "close": "18:00" },
+      "sun": { "open": "8:30", "close": "18:00" }
+    },
+    "popularMenu": [
+      { "name": "奈良茶飯セット", "price": "950円", "description": "奈良の郷土料理とお茶のセット" },
+      { "name": "鹿せんべいラテ", "price": "480円", "description": "奈良らしいユニークなラテ" },
+      { "name": "柿の葉寿司", "price": "680円", "description": "奈良名物の柿の葉寿司" }
+    ]
+  }
+]

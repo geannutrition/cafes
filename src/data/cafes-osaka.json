@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "name": "カフェ・ド・パリ",
+    "address": "大阪府大阪市北区梅田1-1-1",
+    "city": "大阪市",
+    "hours": "8:00-22:00",
+    "features": ["Wi-Fi", "電源", "静か"],
+    "description": "フランス風の落ち着いた雰囲気のカフェ。美味しいコーヒーと手作りスイーツが自慢です。パリの街角にあるような温かみのある空間で、ゆったりとした時間をお過ごしいただけます。朝早くから夜遅くまで営業しているので、モーニングからディナーまで様々なシーンでご利用いただけます。",
+    "image": "/images/cafes/1/main.jpg",
+    "video": "/videos/cafes/1/tour.mp4",
+    "tabelog_url": "https://tabelog.com/example1",
+    "instagram": "https://instagram.com/cafe_de_paris_osaka",
+    "twitter": "https://x.com/cafe_de_paris",
+    "phone": "06-1234-5678",
+    "rating": 4.5,
+    "isNew": true,
+    "openDate": "2023-10-15",
+    "isPR": true,
+    "prStartDate": "2025-06-01",
+    "prEndDate": "2025-06-30",
+    "businessHours": {
+      "mon": { "open": "8:00", "close": "22:00" },
+      "tue": { "open": "8:00", "close": "22:00" },
+      "wed": { "open": "8:00", "close": "22:00" },
+      "thu": { "open": "8:00", "close": "22:00" },
+      "fri": { "open": "8:00", "close": "23:00" },
+      "sat": { "open": "9:00", "close": "23:00" },
+      "sun": { "open": "9:00", "close": "21:00" }
+    },
+    "popularMenu": [
+      { "name": "クロワッサン", "price": "380円", "description": "バターの香り豊かな本格派" },
+      { "name": "カフェラテ", "price": "520円", "description": "濃厚なエスプレッソと滑らかなミルク" },
+      { "name": "キッシュロレーヌ", "price": "680円", "description": "ベーコンとチーズの風味が絶妙" }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "大阪ブリューコーヒー",
+    "address": "大阪府大阪市中央区心斎橋1-2-3",
+    "city": "大阪市",
+    "hours": "7:00-21:00",
+    "features": ["Wi-Fi", "電源", "コワーキング"],
+    "description": "心斎橋の中心部にあるスペシャルティコーヒー専門店。自家焙煎の豆を使用した本格的なコーヒーが楽しめます。",
+    "image": "/images/cafes/4/main.jpg",
+    "video": null,
+    "tabelog_url": "https://tabelog.com/example4",
+    "instagram": "https://instagram.com/osaka_brew_coffee",
+    "twitter": "https://x.com/osaka_brew",
+    "phone": "06-2345-6789",
+    "rating": 4.3,
+    "isNew": false,
+    "openDate": "2022-03-20",
+    "isPR": false,
+    "prStartDate": null,
+    "prEndDate": null,
+    "businessHours": {
+      "mon": { "open": "7:00", "close": "21:00" },
+      "tue": { "open": "7:00", "close": "21:00" },
+      "wed": { "open": "7:00", "close": "21:00" },
+      "thu": { "open": "7:00", "close": "21:00" },
+      "fri": { "open": "7:00", "close": "22:00" },
+      "sat": { "open": "8:00", "close": "22:00" },
+      "sun": { "open": "8:00", "close": "20:00" }
+    },
+    "popularMenu": [
+      { "name": "ドリップコーヒー", "price": "450円", "description": "日替わりの自家焙煎豆" },
+      { "name": "エスプレッソ", "price": "380円", "description": "濃厚で香り高い一杯" },
+      { "name": "フレンチトースト", "price": "780円", "description": "ふわふわの食感が自慢" }
+    ]
+  }
+]
