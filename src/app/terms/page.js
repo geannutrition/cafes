@@ -99,19 +99,9 @@ export default function TermsPage() {
                     当サイトは、必要と判断した場合には、ユーザーに通知することなくいつでも本規約を変更することができるものとします。なお、本規約の変更後、本サービスの利用を開始した場合には、当該ユーザーは変更後の規約に同意したものとみなします。
                   </p>
                 </section>
-
                 <section>
                   <h2 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-rose-600 font-serif">
-                    第8条（個人情報の取扱い）
-                  </h2>
-                  <p className="text-sm md:text-base text-gray-700 leading-relaxed">
-                    当サイトは、本サービスの利用によって取得する個人情報については、当サイト「プライバシーポリシー」に従い適切に取り扱うものとします。
-                  </p>
-                </section>
-
-                <section>
-                  <h2 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-rose-600 font-serif">
-                    第9条（準拠法・裁判管轄）
+                    第8条（準拠法・裁判管轄）
                   </h2>
                   <p className="text-sm md:text-base text-gray-700 leading-relaxed">
                     本規約の解釈にあたっては、日本法を準拠法とします。本サービスに関して紛争が生じた場合には、当サイトの本店所在地を管轄する裁判所を専属的合意管轄とします。

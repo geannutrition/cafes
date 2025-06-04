@@ -2,7 +2,8 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { Coffee, Menu, X } from "lucide-react"
+import Image from "next/image"
+import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export default function Header() {
@@ -10,7 +11,6 @@ export default function Header() {
 
   const navItems = [
     { href: "/", label: "ホーム" },
-    { href: "/about", label: "サイトについて" },
     { href: "/contact", label: "お問い合わせ" },
     { href: "/blog", label: "ブログ" },
   ]
@@ -21,8 +21,16 @@ export default function Header() {
         <div className="flex items-center justify-between h-12 md:h-16">
           {/* ロゴ */}
           <Link href="/" className="flex items-center space-x-2 group">
-            <div className="p-1.5 md:p-2 bg-gradient-to-r from-rose-500 to-amber-500 rounded-lg group-hover:scale-110 transition-transform duration-300">
-              <Coffee className="w-4 h-4 md:w-6 md:h-6 text-white" />
+            <div className="relative w-8 h-8 md:w-10 md:h-10 group-hover:scale-110 transition-transform duration-300">
+              <Image
+                src="/logo.png"
+                alt="関西カフェ検索"
+                fill
+                className="object-contain rounded-lg"
+                onError={(e) => {
+                  e.target.src = "/noimage.jpg"
+                }}
+              />
             </div>
             <span className="text-lg md:text-xl font-bold bg-gradient-to-r from-rose-600 to-amber-600 bg-clip-text text-transparent">
               関西カフェ検索

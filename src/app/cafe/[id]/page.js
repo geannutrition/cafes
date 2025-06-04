@@ -86,11 +86,11 @@ export default function CafeDetailPage() {
   const [cafe, setCafe] = useState(null)
   const [prefecture, setPrefecture] = useState(null)
   const [relatedCafes, setRelatedCafes] = useState([])
+  const [recentlyViewedCafes, setRecentlyViewedCafes] = useState([])
   const [loading, setLoading] = useState(true)
   const [isLiked, setIsLiked] = useState(false)
   const [imageError, setImageError] = useState(false)
   const [showVideo, setShowVideo] = useState(false)
-  const [recentlyViewed, setRecentlyViewed] = useState([])
 
   const cafeId = Number.parseInt(params.id)
 
@@ -117,6 +117,39 @@ export default function CafeDetailPage() {
       loadCafeData()
     }
   }, [cafeId])
+
+  // 最近見たカフェの詳細データを読み込み
+  useEffect(() => {
+    const loadRecentlyViewedCafes = async () => {
+      const storedRecent = localStorage.getItem("recentlyViewedCafes")
+      let recentCafeIds = storedRecent ? JSON.parse(storedRecent) : []
+
+      // 現在のカフェを追加（重複を避ける）
+      if (!recentCafeIds.includes(cafeId)) {
+        recentCafeIds = [cafeId, ...recentCafeIds].slice(0, 5) // 最大5件まで保存
+        localStorage.setItem("recentlyViewedCafes", JSON.stringify(recentCafeIds))
+      }
+
+      // 現在のカフェを除外
+      const filteredIds = recentCafeIds.filter((id) => id !== cafeId).slice(0, 3)
+
+      // 各IDからカフェデータを取得
+      const recentCafesData = []
+      for (const id of filteredIds) {
+        const { cafe: recentCafe } = await findCafeById(id)
+        if (recentCafe) {
+          recentCafesData.push(recentCafe)
+        }
+      }
+
+      setRecentlyViewedCafes(recentCafesData)
+    }
+
+    if (cafeId) {
+      loadRecentlyViewedCafes()
+    }
+  }, [cafeId])
+
   const isCurrentlyPR = cafe ? isPRActive(cafe) : false
 
   // お気に入り状態をローカルストレージから読み込み
@@ -126,18 +159,6 @@ export default function CafeDetailPage() {
       const favorites = JSON.parse(storedFavorites)
       setIsLiked(favorites.includes(cafeId))
     }
-
-    // 最近見たカフェを更新
-    const storedRecent = localStorage.getItem("recentlyViewedCafes")
-    let recentCafes = storedRecent ? JSON.parse(storedRecent) : []
-
-    // 現在のカフェを追加（重複を避ける）
-    if (!recentCafes.includes(cafeId)) {
-      recentCafes = [cafeId, ...recentCafes].slice(0, 5) // 最大5件まで保存
-      localStorage.setItem("recentlyViewedCafes", JSON.stringify(recentCafes))
-    }
-
-    setRecentlyViewed(recentCafes.filter((id) => id !== cafeId))
   }, [cafeId])
 
   // お気に入りの切り替え
@@ -220,7 +241,7 @@ export default function CafeDetailPage() {
         <Header />
         <div className="container mx-auto px-4 py-16 text-center flex-grow">
           <h1 className="text-2xl font-bold text-gray-800 mb-4 font-serif">カフェが見つかりません</h1>
-          <p className="text-gray-600 mb-6">指定されたカフェは存在しないか、削除された可能性���あります。</p>
+          <p className="text-gray-600 mb-6">指定されたカフェは存在しないか、削除された可能性があります。</p>
           <Link href="/">
             <Button className="bg-gradient-to-r from-rose-500 to-amber-500 text-white font-medium">ホームに戻る</Button>
           </Link>
@@ -271,7 +292,7 @@ export default function CafeDetailPage() {
                   <video
                     controls
                     className="w-full h-64 md:h-96 object-cover"
-                    poster={imageError ? "/placeholder.svg?height=400&width=800" : cafe.image}
+                    poster={imageError ? "/images/noimage/2-1.jpg" : cafe.image}
                   >
                     <source src={cafe.video} type="video/mp4" />
                     お使いのブラウザは動画をサポートしていません。
@@ -279,7 +300,7 @@ export default function CafeDetailPage() {
                 ) : (
                   <div className="relative">
                     <Image
-                      src={imageError ? "/placeholder.svg?height=400&width=800" : cafe.image}
+                      src={imageError ? "/images/noimage/2-1.jpg" : cafe.image}
                       alt={cafe.name}
                       width={800}
                       height={400}
@@ -544,35 +565,33 @@ export default function CafeDetailPage() {
             )}
 
             {/* 最近見たカフェ */}
-            {recentlyViewed.length > 0 && (
+            {recentlyViewedCafes.length > 0 && (
               <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
                 <CardContent className="p-4 md:p-6">
                   <h3 className="font-bold text-gray-800 mb-3 md:mb-4 font-serif text-base md:text-lg">
                     最近見たカフェ
                   </h3>
                   <div className="space-y-2 md:space-y-3">
-                    {recentlyViewed.slice(0, 3).map((recentCafeId) => {
-                      // 最近見たカフェの詳細は別途読み込みが必要
-                      return (
-                        <Link key={recentCafeId} href={`/cafe/${recentCafeId}`}>
-                          <div className="flex items-center space-x-2 md:space-x-3 p-2 md:p-3 rounded-lg hover:bg-rose-50 transition-colors cursor-pointer">
-                            <Image
-                              src="/placeholder.svg?height=40&width=40"
-                              alt="最近見たカフェ"
-                              width={40}
-                              height={40}
-                              className="rounded-lg object-cover"
-                            />
-                            <div className="flex-1 min-w-0">
-                              <p className="font-medium text-gray-800 truncate font-serif text-sm">
-                                カフェ #{recentCafeId}
-                              </p>
-                              <p className="text-xs text-gray-500 truncate">詳細を見る</p>
-                            </div>
+                    {recentlyViewedCafes.map((recentCafe) => (
+                      <Link key={recentCafe.id} href={`/cafe/${recentCafe.id}`}>
+                        <div className="flex items-center space-x-2 md:space-x-3 p-2 md:p-3 rounded-lg hover:bg-rose-50 transition-colors cursor-pointer">
+                          <Image
+                            src={recentCafe.image || "/images/noimage/1-1.jpg"}
+                            alt={recentCafe.name}
+                            width={40}
+                            height={40}
+                            className="rounded-lg object-cover"
+                            onError={(e) => {
+                              e.target.src = "/images/noimage/1-1.jpg"
+                            }}
+                          />
+                          <div className="flex-1 min-w-0">
+                            <p className="font-medium text-gray-800 truncate font-serif text-sm">{recentCafe.name}</p>
+                            <p className="text-xs text-gray-500 truncate">{recentCafe.city || recentCafe.location}</p>
                           </div>
-                        </Link>
-                      )
-                    })}
+                        </div>
+                      </Link>
+                    ))}
                   </div>
                 </CardContent>
               </Card>
@@ -589,11 +608,14 @@ export default function CafeDetailPage() {
                     <Link key={relatedCafe.id} href={`/cafe/${relatedCafe.id}`}>
                       <div className="flex items-center space-x-2 md:space-x-3 p-2 md:p-3 rounded-lg hover:bg-rose-50 transition-colors cursor-pointer">
                         <Image
-                          src="/placeholder.svg?height=40&width=40"
+                          src={relatedCafe.image || "/images/noimage/1-1.jpg"}
                           alt={relatedCafe.name}
                           width={40}
                           height={40}
                           className="rounded-lg object-cover"
+                          onError={(e) => {
+                            e.target.src = "/images/noimage/1-1.jpg"
+                          }}
                         />
                         <div className="flex-1 min-w-0">
                           <p className="font-medium text-gray-800 truncate font-serif text-sm">{relatedCafe.name}</p>

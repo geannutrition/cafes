@@ -12,19 +12,20 @@ const Checkbox = React.forwardRef(({ className, checked, onCheckedChange, ...pro
   }
 
   return (
-    <div className="relative">
-      <input
-        type="checkbox"
-        ref={ref}
-        checked={checked}
-        onChange={handleChange}
+    <div className="relative flex items-center">
+      <input type="checkbox" ref={ref} checked={checked} onChange={handleChange} className="sr-only" {...props} />
+      <div
         className={cn(
-          "peer h-4 w-4 shrink-0 rounded-sm border border-gray-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 checked:bg-gray-900 checked:text-white",
+          "h-4 w-4 shrink-0 rounded-sm border border-gray-300 flex items-center justify-center cursor-pointer",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2",
+          "disabled:cursor-not-allowed disabled:opacity-50",
+          checked ? "bg-gray-900 border-gray-900" : "bg-white",
           className,
         )}
-        {...props}
-      />
-      {checked && <Check className="absolute top-0 left-0 h-4 w-4 text-white pointer-events-none" />}
+        onClick={() => onCheckedChange && onCheckedChange(!checked)}
+      >
+        {checked && <Check className="h-3 w-3 text-white" />}
+      </div>
     </div>
   )
 })

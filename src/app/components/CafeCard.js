@@ -50,7 +50,7 @@ export default function CafeCard({ cafe, index, isFavorite, onToggleFavorite, is
     >
       <div className="relative overflow-hidden">
         <Image
-          src={imageError ? "/placeholder.svg?height=200&width=400" : cafe.image}
+          src={imageError ? "/images/noimage/2-1.jpg" : cafe.image}
           alt={cafe.name}
           width={400}
           height={200}

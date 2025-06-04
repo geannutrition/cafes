@@ -3,11 +3,10 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { MapPin, Coffee, TrendingUp, Star, Users, ArrowRight, Megaphone, Search } from "lucide-react"
+import { MapPin, Coffee, TrendingUp, Star, Users, ArrowRight, Megaphone } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
 import newsData from "../data/news.json"
@@ -79,7 +78,6 @@ const prefectures = [
 export default function HomePage() {
   const [totalCafes, setTotalCafes] = useState(0)
   const [featuredPrefecture, setFeaturedPrefecture] = useState(null)
-  const [searchTerm, setSearchTerm] = useState("")
 
   // 新着・PR情報（最新3件）
   const newsItems = newsData.slice(0, 3)
@@ -116,17 +114,7 @@ export default function HomePage() {
           <p className="text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 text-rose-100 animate-fade-in-delay font-medium">
             関西6府県から、あなたにぴったりのカフェを見つけよう
           </p>
-          <div className="max-w-2xl mx-auto relative animate-slide-up">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-            <Input
-              type="text"
-              placeholder="カフェ名や地域で検索..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-12 py-4 text-lg rounded-full border-0 shadow-2xl bg-white/95 backdrop-blur-sm text-gray-700 placeholder:text-gray-500"
-            />
-          </div>
-          <div className="flex items-center justify-center space-x-6 md:space-x-8 text-rose-100 animate-slide-up mt-8">
+          <div className="flex items-center justify-center space-x-6 md:space-x-8 text-rose-100 animate-slide-up">
             <div className="text-center">
               <div className="text-2xl md:text-3xl font-bold">{totalCafes}+</div>
               <div className="text-sm md:text-base">カフェ掲載</div>
@@ -157,11 +145,14 @@ export default function HomePage() {
                 >
                   <div className="relative overflow-hidden">
                     <Image
-                      src={`/placeholder.svg?height=200&width=400&text=${prefecture.name}`}
+                      src={prefecture.image || "/placeholder.svg"}
                       alt={prefecture.name}
                       width={400}
                       height={200}
                       className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700"
+                      onError={(e) => {
+                        e.target.src = "/images/noimage/2-1.jpg"
+                      }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                     <div className="absolute bottom-4 left-4 right-4">
@@ -229,11 +220,14 @@ export default function HomePage() {
                 >
                   <div className="relative">
                     <Image
-                      src={`/placeholder.svg?height=150&width=300&text=${item.type}`}
+                      src={item.image || "/images/noimage/2-1.jpg"}
                       alt={item.title}
                       width={300}
                       height={150}
                       className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-300"
+                      onError={(e) => {
+                        e.target.src = "/images/noimage/2-1.jpg"
+                      }}
                     />
                     <Badge
                       className={`absolute top-2 left-2 ${
@@ -296,11 +290,14 @@ export default function HomePage() {
                   </div>
                   <div className="relative">
                     <Image
-                      src={`/placeholder.svg?height=250&width=400&text=${featuredPrefecture.name}`}
+                      src={featuredPrefecture.image || "/placeholder.svg"}
                       alt={featuredPrefecture.name}
                       width={400}
                       height={250}
                       className="w-full h-64 object-cover rounded-lg shadow-lg"
+                      onError={(e) => {
+                        e.target.src = "/images/noimage/8-5.jpg"
+                      }}
                     />
                   </div>
                 </div>

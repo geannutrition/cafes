@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Calendar, User, Megaphone, Star, TrendingUp, Filter, X } from "lucide-react"
+import { Calendar, User, Megaphone, Star, TrendingUp, Filter, X, Home } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -84,6 +84,14 @@ export default function NewsPage() {
       <section className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-rose-600 text-white">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative container mx-auto px-4 py-8 md:py-16">
+          <div className="flex items-center justify-between mb-4">
+            <Link href="/">
+              <Button variant="ghost" className="text-white hover:bg-white/20 font-medium">
+                <Home className="w-4 h-4 mr-2" />
+                ホームに戻る
+              </Button>
+            </Link>
+          </div>
           <h1 className="text-2xl md:text-5xl font-bold mb-2 md:mb-4 font-serif">ニュース・お知らせ</h1>
           <p className="text-base md:text-xl mb-4 md:mb-8 text-white/90">関西カフェの最新情報をお届けします</p>
         </div>
@@ -104,11 +112,14 @@ export default function NewsPage() {
                     <Card className="overflow-hidden bg-white/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 group">
                       <div className="relative">
                         <Image
-                          src={`/placeholder.svg?height=150&width=400&text=${news.type}`}
+                          src={news.image || "/images/noimage/8-3.jpg"}
                           alt={news.title}
                           width={400}
                           height={150}
                           className="w-full h-32 md:h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                          onError={(e) => {
+                            e.target.src = "/images/noimage/8-3.jpg"
+                          }}
                         />
                         <Badge
                           className={`absolute top-2 md:top-3 left-2 md:left-3 ${config.color} text-white border-0 text-xs`}
@@ -247,11 +258,14 @@ export default function NewsPage() {
                       <div className="grid grid-cols-3 md:grid-cols-4 gap-0">
                         <div className="relative col-span-1">
                           <Image
-                            src={`/placeholder.svg?height=100&width=150&text=${news.type}`}
+                            src={news.image || "/images/noimage/3-2.jpg"}
                             alt={news.title}
                             width={150}
                             height={100}
                             className="w-full h-20 md:h-32 object-cover group-hover:scale-105 transition-transform duration-300"
+                            onError={(e) => {
+                              e.target.src = "/images/noimage/3-2.jpg"
+                            }}
                           />
                           <Badge
                             className={`absolute top-1 md:top-2 left-1 md:left-2 ${config.color} text-white border-0 text-xs`}

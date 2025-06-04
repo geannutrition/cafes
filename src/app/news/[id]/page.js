@@ -140,11 +140,14 @@ export default function NewsDetailPage() {
               <Card className="overflow-hidden bg-white/80 backdrop-blur-sm border-0 shadow-xl">
                 <div className="relative">
                   <Image
-                    src={`/placeholder.svg?height=200&width=600&text=${news.type}`}
+                    src={news.image || "/images/noimage/3-1.jpg"}
                     alt={news.title}
                     width={600}
                     height={200}
                     className="w-full h-40 md:h-80 object-cover"
+                    onError={(e) => {
+                      e.target.src = "/images/noimage/3-1.jpg"
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                   <div className="absolute bottom-3 md:bottom-6 left-3 md:left-6 right-3 md:right-6">
@@ -262,11 +265,14 @@ export default function NewsDetailPage() {
                         <Link key={relatedItem.id} href={`/news/${relatedItem.id}`}>
                           <div className="flex space-x-2 md:space-x-3 p-2 md:p-3 rounded-lg hover:bg-rose-50 transition-colors cursor-pointer">
                             <Image
-                              src={`/placeholder.svg?height=40&width=60&text=${relatedItem.type}`}
+                              src={relatedItem.image || "/images/noimage/3-2.jpg"}
                               alt={relatedItem.title}
                               width={60}
                               height={40}
                               className="w-12 md:w-20 h-9 md:h-15 object-cover rounded-lg flex-shrink-0"
+                              onError={(e) => {
+                                e.target.src = "/images/noimage/3-2.jpg"
+                              }}
                             />
                             <div className="flex-1 min-w-0">
                               <Badge className={`${relatedConfig.color} text-white border-0 text-xs mb-1`}>
